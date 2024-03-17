@@ -12,9 +12,55 @@ function x() {
 }
 x();
 
-// this in strict mode - (this substitution)
+// this inside non strict mode - (this substitution)
 // If the value of the this keyword is undefined or null then
 // this keyward will be replaced with global object
 // only in non strict mode
+
 window.x();
-// this keyward value will depends upon how the function is called 
+// this keyward value will depends upon how the function is called
+
+// 3. This inside a object's method
+const student = {
+  name: "Rohit",
+  printName: function () {
+    console.log(this.name);
+  },
+};
+
+// student.printName(); //obj
+
+// call, apply, bind
+
+const student2 = {
+  name: "Deeksha",
+};
+
+// student.printName.call(student2);
+
+// 4. this inside arrow functions
+// retains the this value of the enclosing lexical context
+const obj = {
+  print: () => {
+    console.log(this);
+  },
+};
+
+// obj.print();
+
+// 5. this inside nested arrow function
+
+const obj2 = {
+  a: 44,
+  x: function () {
+    const y = () => {
+      console.log(this);
+    };
+    y();
+  },
+};
+// Here enclosing lexical context of y is function x
+// so it will behave as this of function x
+obj2.x();
+
+// 6. This inside DOM elements => reference to HTML element
